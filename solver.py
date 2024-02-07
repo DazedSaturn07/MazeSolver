@@ -1,8 +1,9 @@
-import cv2
-import matplotlib.pyplot as plt
-import numpy as np
+# install the required libraries
+import cv2 # for this type in terminal : pip install opencv_python
+import matplotlib.pyplot as plt # for this : pip install matplotlib 
+import numpy as np # for this : pip install numpy
 
-
+#We define this class for the graph
 class Vertex:
     def __init__(self, x_coord, y_coord):
         self.x = x_coord
@@ -13,6 +14,7 @@ class Vertex:
         self.processed = False
         self.index_in_queue = None
 
+    #Return neighbor directly above, below, right, and left
     @staticmethod
     def get_neighbors(mat, r, c):
         shape = mat.shape
@@ -27,7 +29,7 @@ class Vertex:
             neighbors.append(mat[r][c + 1])
         return neighbors
 
-
+#We use priority queue to store the unprocessed nodes of the graph we define the reheap up and reheap down functions
 def reheap_up(queue, index):
     if index <= 0:
         return queue
@@ -39,7 +41,7 @@ def reheap_up(queue, index):
         queue = reheap_up(queue, p_index)
     return queue
 
-
+#Calculating eucledian distance btw two nodes .1 is added to ensure that distance is non zero value
 def reheap_down(queue, index):
     length = len(queue)
     lc_index = 2 * index + 1
